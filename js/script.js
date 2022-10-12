@@ -18,29 +18,43 @@ let prezzo, prezzoRounded, msg;
 const prezzoBiglietto = kmUtente * prezzoKm;
 
 
-if (anniUtente < 18){
-    sconto = prezzoBiglietto * (1- scontoMinorenni);
-    // sconto = prezzoBiglietto * scontoMinorenni;
 
+
+
+
+
+if (anniUtente < 18){
+    discountprice = prezzoBiglietto * (1- scontoMinorenni);
+    // sconto = prezzoBiglietto * scontoMinorenni;
+    
+    prezzoRounded = Math.round((discountprice + Number.EPSILON) * 100) /100;
+    msg = `Il tuo biglietto costa ${prezzoRounded}€`;
     msg += `
     <br>
     Essendo minorenne ha lo sconto del ${scontoMinorenni * 100}% quindi paghi solo ${prezzoRounded}€
-    `
+    `;
 }else if(anniUtente > 65){
-    sconto = prezzoBiglietto * (1- scontoOver);
+    discountprice = prezzoBiglietto * (1- scontoOver);
+    
+    prezzoRounded = Math.round((discountprice + Number.EPSILON) * 100) /100;
+    msg = `Il tuo biglietto costa ${prezzoRounded}€`;
     msg += `
     <br>
     Essendo senior ha lo sconto del ${scontoOver * 100}% quindi paghi solo ${prezzoRounded}€
-    `
+    `;
 }else{
-    sconto = 0;
+    discountprice = 0;
+    
+    price = prezzoBiglietto - discountprice;
+    prezzoRounded = Math.round((price + Number.EPSILON) * 100) /100;
+    msg = `Il tuo biglietto costa ${prezzoRounded}€`;55
+
+
 }
 
-prezzo = prezzoBiglietto - sconto;
 
-prezzoRounded = Math.round((prezzo + Number.EPSILON) * 100) /100;
 
-msg = `Il tuo biglietto costa ${prezzoRounded}€`
+
 
 
 
